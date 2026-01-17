@@ -11,10 +11,12 @@ describe('Validar termo de segurança da UOL', () => {
             .selectFooterOptions("Sobre o UOL", "Segurança e privacidade")
 
         cy.origin('https://sobreuol.noticias.uol.com.br/**', () => {
-            cy.url().should('include', 'sobreuol.noticias.uol.com.br')
             const securityUpdateDate = '21 de julho de 2021'
+            const pageTerm = 'Normas de Segurança e Privacidade'
 
-            cy.contains(securityUpdateDate).scrollIntoView()
+            cy.get('h1').contains(pageTerm).should('be.visible')
+            cy.scrollTo('bottom')
+            cy.contains(securityUpdateDate).should('be.visible')
         })
     });
 });
